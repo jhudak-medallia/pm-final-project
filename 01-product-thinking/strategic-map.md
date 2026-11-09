@@ -1,11 +1,7 @@
-# Strategic Discovery Map
-
-> **Module 1 · Lab 1.** Repo file `01-product-thinking/strategic-map.md` — part of your submission.
-> Do the lab in the **Module 1 · Exercise 1 Guide** (linked from the Module 1 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It's the discovery groundwork behind your `problem-hook.md`.
+# Strategic Discovery Map (Module 1)
 
 ## Responses
-
-- **Feature with no strategic answer (why is this a 12-week priority?):** _(not filled in)_
-- **Feature that looks "correct" but has zero strategic weight:** _(not filled in)_
-- **V3 vs your Step 1 baseline — what changed, and was it your PM knowledge that forced usefulness?:** _(not filled in)_
+- **Write one feature from the map that, if an engineer asked “why is this a priority for our 12-week roadmap?”, you honestly could not give a strategic answer for.:** I don't see a strategic reason to prioritize "growing plant/pet avatar" as a feature for a water tracking app. There is no specific customer need or business goal that this solves. One could argue it might boost retention or engagement, but that is an untested guess, and it reads as a gimmicky feature rather than a validated bet worth 12 weeks of roadmap.
+- **Write one feature that looks “correct” for the app but has zero strategic weight, you have no idea if it helps the company make money or whether a single user actually asked for it.:** "Athletes and heat exposure" could be a nice to have feature to customize the experience for a niche population, but athletes are not a specific target persona for the app, no user has asked for it, and there is no evidence it drives revenue or retention, so there's no strategic justification to build.
+- **Compare V3 to your Step 1 baseline. What changed, and is the output objectively better, did the AI get smarter, or did your added PM knowledge (JTBD, effort/impact, retention) force it to be useful?:** V3 is materially better than the Step 1 baseline, but not because the AI got smarter. The difference is the quality of the PM's prompt: adding JTBD, effort/impact, and retention as context and parameters forced the AI to evaluate features against strategic criteria instead of just brainstorming. That PM knowledge is what makes the AI useful as a thinking partner in discovery.
+- **Key takeaway: how does this prove the PM’s role is to think while the AI’s role is to execute?:** The PM needs to think critically in prioritizing the problems that are worth solving that truly solve a customer need, align with the business strategy and are feasible to implement.
