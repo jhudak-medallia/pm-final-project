@@ -14,13 +14,13 @@ I am going to commit to the RouteLogic scenario as the B2B use case and strategi
 
 _The big-picture business risk. If the company does nothing for 12 months, what happens to its market position?_
 
-> If the company does nothing for 12 months, RouteLogic will continue to see declining engagement from core users (**[X% drop in weekly active dispatchers]**) and lost customers (**[Y% churn / Z accounts at risk at renewal]**) who opt to use leaner alternatives that make daily operational tasks easy to execute and scale to new users and personas. This will begin to erode RouteLogic's position as the market leader and trust with its end users, which is very difficult to regain once lost.
+> If the company does nothing for 12 months, RouteLogic will continue to see declining engagement from core users (internal data already shows a **sharp decline in usage among the people responsible for real-time fleet coordination**) and lost customers (our **largest enterprise account is already trialing a leaner competitor**) who opt to use leaner alternatives that make daily operational tasks easy to execute and scale to new users and personas. This will begin to erode RouteLogic's position as the market leader and trust with its end users, which is very difficult to regain once lost. The board already worries that the product's complexity is slowing down the very operations it was built to speed up.
 
 ## 3. The moment of misery
 
 _The specific point where the product fails the user, forcing a manual workaround (Google, spreadsheets, group texts, a competitor)._
 
-> The dispatchers and fleet coordinators responsible for real-time fleet coordination are disengaging from RouteLogic (**[usage evidence from the brief]**) because simple, high-frequency tasks are frustratingly complex. Our working assumption, to be validated in Module 2 discovery, is that they are testing leaner competitors and, possibly worse, resorting to low fidelity general purpose tools (e.g. Slack, spreadsheets, etc) to coordinate their fleets which can also impact their quality/risk position.
+> The dispatchers and fleet coordinators responsible for real-time fleet coordination are disengaging from RouteLogic because years of specialized features, used by only a small fraction of customers, have turned simple, high-frequency tasks into a struggle. Our largest enterprise account calls RouteLogic **an administrative burden that slows their most time-sensitive work** and is trialing a leaner competitor. Our working assumption, to be validated in Module 2 discovery, is that other frontline users are also turning to competitors or, possibly worse, resorting to low fidelity general purpose tools (e.g. Slack, spreadsheets, etc) to coordinate their fleets which can also impact their quality/risk position.
 
 ## 4. Problem hook
 
@@ -34,13 +34,13 @@ _Who it's for, the new value, and why it's urgent to launch now._
 
 > For the **dispatchers and fleet coordinators who make up 95% of our users**, we will introduce a **workflow manager that makes their most frequent daily tasks fast and simple**, so we can **win back their trust and engagement before they switch to leaner competitors or general-purpose tools**.
 
-The workflow manager will focus first on the core real-time coordination tasks, for example **reassigning a driver, updating a customer ETA, and resolving a route exception** _(confirm the top tasks against the brief and Module 2 discovery)_. It makes them simpler by:
+As part of RouteLogic Velocity, we will audit the current experience against existing user research to separate essential features from legacy noise. The workflow manager will then focus first on the core real-time coordination tasks, for example **reassigning a driver, updating a customer ETA, and resolving a route exception** _(confirm the top tasks against the brief and Module 2 discovery)_. It makes them simpler by:
 
 - Turning each task into a single guided flow with fewer clicks and screens.
 - Using sensible defaults instead of custom setup and configuration.
-- Hiding the custom one-off features that most users never use, removing the administrative burden they created.
+- Moving the specialized enterprise capabilities (such as global shipping compliance and executive financial reporting) out of the everyday user's way, while keeping them fully available for the customers and roles that need them.
 
-**Why now:** every month we wait, more core users settle into competitors or Slack-and-spreadsheet workarounds, and those habits, and that lost trust, are hard to win back.
+**Why now:** our largest enterprise account is trialing a competitor today and the board is already concerned. Every month we wait, more core users settle into competitors or Slack-and-spreadsheet workarounds, and those habits, and that lost trust, are hard to win back. Velocity is how we prove RouteLogic can still be the fastest tool on the market.
 
 ## 6. Cold-read self-review
 
