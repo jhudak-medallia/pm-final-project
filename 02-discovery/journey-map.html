@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journey Map: High-Volume Delivery Driver (RouteLogic Velocity)</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-0: #f4f3f0;
+    --surface-1: #fcfcfb;
+    --surface-2: #f0efec;
+    --border: #e2e1dc;
+    --grid: #e8e7e2;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #77766f;
+    --series-1: #2a78d6;
+    --neutral-mid: #b9b8b0;
+    --good: #0ca30c;
+    --warning: #fab219;
+    --serious: #ec835a;
+    --critical: #d03b3b;
+    --tooltip-bg: #0b0b0b;
+    --tooltip-fg: #f0efec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-0: #111110;
+      --surface-1: #1a1a19;
+      --surface-2: #232321;
+      --border: #383835;
+      --grid: #2c2c2a;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #9a998f;
+      --series-1: #3987e5;
+      --neutral-mid: #5a5955;
+      --tooltip-bg: #f0efec;
+      --tooltip-fg: #0b0b0b;
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --surface-0: #111110;
+    --surface-1: #1a1a19;
+    --surface-2: #232321;
+    --border: #383835;
+    --grid: #2c2c2a;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #9a998f;
+    --series-1: #3987e5;
+    --neutral-mid: #5a5955;
+    --tooltip-bg: #f0efec;
+    --tooltip-fg: #0b0b0b;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .viz-root {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 32px 24px 48px;
+    line-height: 1.45;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+
+  header h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  header .sub { color: var(--text-secondary); font-size: 14px; margin: 0; }
+  .toolbar { display: flex; justify-content: flex-end; margin-top: -28px; }
+  .toolbar button {
+    font: inherit; font-size: 13px; color: var(--text-secondary);
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px; cursor: pointer;
+  }
+
+  .persona {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin: 24px 0;
+  }
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .card h3 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); margin: 0 0 6px; font-weight: 600;
+  }
+  .card p { margin: 0; font-size: 14px; }
+
+  .map {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; overflow-x: auto;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 150px repeat(5, minmax(190px, 1fr));
+    min-width: 1100px;
+  }
+  .rowlabel {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); font-weight: 600;
+    padding: 14px 12px 14px 16px;
+    border-top: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .cell {
+    padding: 14px 14px; font-size: 13.5px;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+  }
+  .cell.low { background: color-mix(in srgb, var(--critical) 6%, var(--surface-1)); }
+  .stage {
+    border-top: none;
+    padding-top: 16px; padding-bottom: 16px;
+  }
+  .stage .num { font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .stage .name { font-size: 16px; font-weight: 650; margin-top: 2px; }
+  .stage .when { font-size: 12px; color: var(--text-secondary); }
+  .rowlabel.top { border-top: none; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    display: inline-block; font-size: 12px; padding: 2px 8px;
+    border-radius: 999px; border: 1px solid var(--border);
+    background: var(--surface-2); color: var(--text-primary);
+  }
+  .chip.app { border-style: dashed; color: var(--text-secondary); background: transparent; }
+
+  .quote { margin: 0; font-style: italic; color: var(--text-secondary); }
+  .tag {
+    display: block; margin-top: 6px; font-size: 10.5px; font-style: normal;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted);
+  }
+
+  .curve-cell { grid-column: 2 / span 5; padding: 0; border-left: 1px solid var(--border); border-top: 1px solid var(--border); position: relative; }
+  svg.curve { display: block; width: 100%; height: 230px; }
+  .curve text { font-size: 11px; fill: var(--text-muted); }
+  .curve .axis-label { font-size: 11px; fill: var(--text-muted); }
+  .curve .anno { font-size: 12px; fill: var(--text-primary); font-weight: 600; }
+  .curve .anno-sub { font-size: 11px; fill: var(--text-secondary); }
+
+  .sev { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+  .sev .dot { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .sev .icon { font-size: 12px; line-height: 1; }
+
+  .cost { font-size: 18px; font-weight: 650; }
+  .cost small { display: block; font-size: 12px; font-weight: 400; color: var(--text-secondary); }
+
+  .tooltip {
+    position: absolute; pointer-events: none; opacity: 0;
+    background: var(--tooltip-bg); color: var(--tooltip-fg);
+    font-size: 12px; padding: 8px 10px; border-radius: 6px;
+    max-width: 240px; transform: translate(-50%, calc(-100% - 12px));
+        z-index: 2;
+  }
+  .tooltip b { display: block; margin-bottom: 2px; }
+
+  .section-title { font-size: 16px; font-weight: 650; margin: 32px 0 12px; }
+  .impact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .impact .card p + p { margin-top: 6px; color: var(--text-secondary); font-size: 13px; }
+
+  .notes { margin-top: 28px; font-size: 12.5px; color: var(--text-secondary); }
+  .notes ul { margin: 6px 0 0; padding-left: 18px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--text-secondary); margin: 10px 2px 0; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+  @media print {
+    .toolbar { display: none; }
+    .viz-root { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="viz-root">
+<div class="wrap">
+
+  <header>
+    <h1>Journey Map: The High-Volume Delivery Driver</h1>
+    <p class="sub">RouteLogic Velocity · Module 2 Discovery · One shift, five stages, and the workarounds drivers use at each one</p>
+  </header>
+  <div class="toolbar"><button id="themeToggle" type="button">Toggle dark mode</button></div>
+
+  <section class="persona" aria-label="Persona">
+    <div class="card"><h3>Role</h3><p>A frontline delivery driver who runs 40+ stops a day and spends their whole shift in the RouteLogic mobile app.</p></div>
+    <div class="card"><h3>Goal</h3><p>Get through every stop quickly and with confidence, without fighting the app at each doorstep.</p></div>
+    <div class="card"><h3>Friction</h3><p>Feature bloat has buried core actions: "Start Route" (~30 uses a day) sits 2–3 levels deep, and "Mark Delivered" takes 3 taps across 3 screens.</p></div>
+  </section>
+
+  <div class="map" role="region" aria-label="Journey map" tabindex="0">
+    <div class="grid" id="grid">
+      <!-- Stage headers -->
+      <div class="rowlabel top">Stage</div>
+      <div class="cell stage"><div class="num">01</div><div class="name">Before the shift</div><div class="when">At the depot</div></div>
+      <div class="cell stage"><div class="num">02</div><div class="name">On the road</div><div class="when">Between stops</div></div>
+      <div class="cell stage low"><div class="num">03</div><div class="name">At the doorstep</div><div class="when">40+ times a day</div></div>
+      <div class="cell stage"><div class="num">04</div><div class="name">Proof of delivery</div><div class="when">Every stop</div></div>
+      <div class="cell stage"><div class="num">05</div><div class="name">When the app fails</div><div class="when">Crash or route change</div></div>
+
+      <!-- Doing -->
+      <div class="rowlabel">What the driver does</div>
+      <div class="cell">Screenshots the stop list while there's signal and keeps a printed paper manifest in the cab in case the app crashes or loses signal.</div>
+      <div class="cell">Ignores parts of the optimized route and drives around known closures and access problems from memory, making the same corrections every day.</div>
+      <div class="cell low">Skips the 3-screen "Mark Delivered" flow and texts or WhatsApps dispatch to confirm the drop-off or report a failed delivery.</div>
+      <div class="cell">Retakes the proof-of-delivery photo up to 3 times because uploads fail on weak signal with no confirmation.</div>
+      <div class="cell">Switches to paper or screenshots and calls dispatch to have the remaining stops read out.</div>
+
+      <!-- Tools -->
+      <div class="rowlabel">Tools used</div>
+      <div class="cell"><div class="tools"><span class="chip">Paper manifest</span><span class="chip">Phone screenshots</span><span class="chip app">RouteLogic (offline: blank)</span></div></div>
+      <div class="cell"><div class="tools"><span class="chip">Driver's memory</span><span class="chip app">RouteLogic routing (overridden)</span></div></div>
+      <div class="cell low"><div class="tools"><span class="chip">SMS</span><span class="chip">WhatsApp</span><span class="chip">Phone call</span><span class="chip app">Mark Delivered (skipped)</span></div></div>
+      <div class="cell"><div class="tools"><span class="chip app">RouteLogic photo upload</span><span class="chip">Repeated retakes</span></div></div>
+      <div class="cell"><div class="tools"><span class="chip">Phone call to dispatch</span><span class="chip">Paper manifest</span><span class="chip">Screenshots</span></div></div>
+
+      <!-- Emotion curve -->
+      <div class="rowlabel">Emotional curve</div>
+      <div class="curve-cell" id="curveCell">
+        <svg class="curve" id="curve" role="img" aria-labelledby="curveTitle curveDesc">
+          <title id="curveTitle">Driver emotional curve across the shift</title>
+          <desc id="curveDesc">Sentiment starts mildly negative before the shift, dips on the road, reaches its lowest point at the doorstep, recovers slightly at proof of delivery, and falls again when the app fails.</desc>
+        </svg>
+        <div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+      </div>
+
+      <!-- Voice -->
+      <div class="rowlabel">Voice of the driver</div>
+      <div class="cell"><p class="quote">"Just in case the app dies."</p><span class="tag">Research · 5 of 7 drivers carry a paper manifest</span></div>
+      <div class="cell"><p class="quote">"Route optimization sent me down a road that's been closed for months. It doesn't know about traffic or the loading dock round the back. I override it every day."</p><span class="tag">Research · driver quote</span></div>
+      <div class="cell low"><p class="quote">"Menus inside menus."</p><span class="tag">Research · new drivers. All 7 drivers rank core-action speed above any new feature</span></div>
+      <div class="cell"><p class="quote">Drivers don't know if it worked, so they retake three times.</p><span class="tag">Research · observed behavior</span></div>
+      <div class="cell"><p class="quote">"The app crashed mid-route and lost my remaining stops. I had to call the office to read them to me off a screen. Twenty minutes gone."</p><span class="tag">Research · driver quote</span></div>
+
+      <!-- Pain point -->
+      <div class="rowlabel">Pain point &amp; severity</div>
+      <div class="cell"><div class="sev"><span class="dot" style="background:var(--serious)"></span><span class="icon" aria-hidden="true">▲</span>High</div>Offline mode doesn't cache the stop list, and the backups are out of date as soon as dispatch changes the route.</div>
+      <div class="cell"><div class="sev"><span class="dot" style="background:var(--warning)"></span><span class="icon" aria-hidden="true">●</span>Medium</div>Routing ignores closures, traffic, and site access, and local corrections can't be saved.</div>
+      <div class="cell low"><div class="sev"><span class="dot" style="background:var(--serious)"></span><span class="icon" aria-hidden="true">▲</span>High · top frontline complaint</div>A core action used 40+ times a day is buried behind 3 taps and 3 screens, so the delivery record moves to a chat thread.</div>
+      <div class="cell"><div class="sev"><span class="dot" style="background:var(--serious)"></span><span class="icon" aria-hidden="true">▲</span>High</div>About 35% of uploads fail on weak signal, with no retry queue and no confirmation.</div>
+      <div class="cell"><div class="sev"><span class="dot" style="background:var(--critical)"></span><span class="icon" aria-hidden="true">✖</span>Critical</div>The app crashes on Android 12/13 on routes over ~40 stops and the remaining route is lost. Reassignments take 8–15 minutes to arrive.</div>
+
+      <!-- Cost -->
+      <div class="rowlabel">Cost of the workaround</div>
+      <div class="cell"><div class="cost">2 versions<small>of the route kept and compared by hand all day</small></div></div>
+      <div class="cell"><div class="cost">Daily<small>the same overrides are repeated, and the knowledge stays with each driver</small></div></div>
+      <div class="cell low"><div class="cost">40+ / day<small>texts or calls that become manual work for dispatch</small></div></div>
+      <div class="cell"><div class="cost">Up to 3×<small>photos per stop, and proof is still uncertain</small></div></div>
+      <div class="cell"><div class="cost">~20 min<small>lost per crash, on the phone with dispatch</small></div></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-label="Severity legend">
+    <span><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--critical)"></span>✖ Critical</span>
+    <span><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--serious)"></span>▲ High</span>
+    <span><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--warning)"></span>● Medium</span>
+    <span>Dashed chip = RouteLogic feature the driver works around</span>
+  </div>
+
+  <h2 class="section-title">Why it matters to the business</h2>
+  <section class="impact">
+    <div class="card"><h3>Usage decline</h3><p>Drivers still deliver, just not through RouteLogic.</p><p>Deliveries, exceptions, and route changes now live in WhatsApp, on paper, and in phone calls.</p></div>
+    <div class="card"><h3>Renewal risk</h3><p>The reporting customers buy RouteLogic for is fed by driver data that's late, incomplete, or missing.</p><p>Executives see bad dashboards and question the investment.</p></div>
+    <div class="card"><h3>Cost moves to dispatch</h3><p>Every driver text becomes manual entry for a dispatcher.</p><p>This matches the largest enterprise account calling RouteLogic "an administrative burden."</p></div>
+    <div class="card"><h3>Competitive opening</h3><p>If drivers already get by with a phone and a paper list, a leaner routing-focused tool is an easy switch.</p><p>The largest enterprise account is already trialing one.</p></div>
+  </section>
+
+  <div class="notes">
+    <strong>Notes on sources</strong>
+    <ul>
+      <li>Figures, severities, and quotes come from the Module 2 Product Health &amp; Insights Summary (12 research sessions, 10 bug reports). Verify them against the source before you submit.</li>
+      <li>The emotional curve is an illustrative synthesis of the research, not measured sentiment.</li>
+      <li>"Menus inside menus" comes from new drivers. Swap in a direct quote from a high-volume driver about taps or buried actions if your research has one.</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+
+<script>
+(function () {
+  // Theme toggle (respects OS preference until clicked)
+  var root = document.documentElement;
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    var isDark = root.dataset.theme
+      ? root.dataset.theme === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = isDark ? 'light' : 'dark';
+  });
+
+  // Emotional curve: -2 (very negative) to +1 (positive). Illustrative.
+  var stages = [
+    { name: 'Before the shift', score: -0.6, feel: 'Wary', note: 'Building backups before the day starts' },
+    { name: 'On the road',      score: -1.0, feel: 'Frustrated', note: 'Overriding the same bad routing again' },
+    { name: 'At the doorstep',  score: -2.0, feel: 'Exasperated', note: 'Lowest point, repeated 40+ times a day' },
+    { name: 'Proof of delivery',score: -1.4, feel: 'Uncertain', note: 'Did the photo upload? Retake to be safe' },
+    { name: 'When the app fails',score: -1.8, feel: 'Stranded', note: 'Route lost, ~20 min on the phone' }
+  ];
+
+  var svg = document.getElementById('curve');
+  var cell = document.getElementById('curveCell');
+  var tip = document.getElementById('tooltip');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e);
+    return e;
+  }
+
+  function draw() {
+    while (svg.lastChild && svg.lastChild.tagName !== 'desc') {
+      if (svg.lastChild.tagName === 'title') break;
+      svg.removeChild(svg.lastChild);
+    }
+    var W = svg.clientWidth, H = svg.clientHeight;
+    var padT = 24, padB = 36;
+    var colW = W / stages.length;
+    var y = function (s) { return padT + (1 - s) / 3.4 * (H - padT - padB); };
+    var x = function (i) { return colW * i + colW / 2; };
+
+    // Recessive grid: neutral line + top/bottom references
+    [1, 0, -2].forEach(function (v) {
+      el('line', { x1: 0, x2: W, y1: y(v), y2: y(v),
+        stroke: v === 0 ? 'var(--neutral-mid)' : 'var(--grid)',
+        'stroke-width': 1, 'stroke-dasharray': v === 0 ? '4 4' : '' });
+    });
+    el('text', { x: 8, y: y(1) + 14, class: 'axis-label' }).textContent = 'Positive';
+    el('text', { x: 8, y: y(0) - 6, class: 'axis-label' }).textContent = 'Neutral';
+    el('text', { x: 8, y: y(-2) - 6, class: 'axis-label' }).textContent = 'Very negative';
+
+    // Line (smooth)
+    var pts = stages.map(function (s, i) { return [x(i), y(s.score)]; });
+    var d = 'M' + pts[0][0] + ',' + pts[0][1];
+    for (var i = 1; i < pts.length; i++) {
+      var cx = (pts[i - 1][0] + pts[i][0]) / 2;
+      d += ' C' + cx + ',' + pts[i - 1][1] + ' ' + cx + ',' + pts[i][1] + ' ' + pts[i][0] + ',' + pts[i][1];
+    }
+    el('path', { d: d, fill: 'none', stroke: 'var(--series-1)', 'stroke-width': 2, 'stroke-linecap': 'round' });
+
+    // Markers + labels + hit targets
+    stages.forEach(function (s, i) {
+      var isLow = i === 2;
+      el('circle', { cx: pts[i][0], cy: pts[i][1], r: isLow ? 6 : 5,
+        fill: isLow ? 'var(--critical)' : 'var(--series-1)',
+        stroke: 'var(--surface-1)', 'stroke-width': 2 });
+      var lbl = el('text', { x: pts[i][0], y: pts[i][1] - 14, 'text-anchor': 'middle', class: isLow ? 'anno' : 'anno-sub' });
+      lbl.textContent = s.feel;
+      if (isLow) {
+        var sub = el('text', { x: pts[i][0], y: pts[i][1] + 22, 'text-anchor': 'middle', class: 'anno-sub' });
+        sub.textContent = 'Lowest point · 40+ times a day';
+      }
+      var hit = el('rect', { x: colW * i, y: 0, width: colW, height: H, fill: 'transparent', tabindex: 0,
+        'aria-label': s.name + ': ' + s.feel + '. ' + s.note });
+      function show() {
+        tip.innerHTML = '<b>' + s.name + ' · ' + s.feel + '</b>' + s.note;
+        tip.style.left = pts[i][0] + 'px';
+        tip.style.top = pts[i][1] + 'px';
+        tip.style.opacity = 1;
+      }
+      function hide() { tip.style.opacity = 0; }
+      hit.addEventListener('mouseenter', show);
+      hit.addEventListener('focus', show);
+      hit.addEventListener('mouseleave', hide);
+      hit.addEventListener('blur', hide);
+    });
+  }
+
+  draw();
+  window.addEventListener('resize', draw);
+})();
+</script>
+</body>
+</html>
