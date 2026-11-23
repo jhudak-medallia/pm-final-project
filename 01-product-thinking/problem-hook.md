@@ -20,7 +20,9 @@ _The big-picture business risk. If the company does nothing for 12 months, what 
 
 _The specific point where the product fails the user, forcing a manual workaround (Google, spreadsheets, group texts, a competitor)._
 
-> The dispatchers and fleet coordinators responsible for real-time fleet coordination are disengaging from RouteLogic because years of specialized features, used by only a small fraction of customers, have turned simple, high-frequency tasks into a struggle. Our largest enterprise account calls RouteLogic **an administrative burden that slows their most time-sensitive work** and is trialing a leaner competitor. Our working assumption, to be validated in Module 2 discovery, is that other frontline users are also turning to competitors or, possibly worse, resorting to low fidelity general purpose tools (e.g. Slack, spreadsheets, etc) to coordinate their fleets which can also impact their quality/risk position.
+> Frontline delivery drivers, who run 40+ stops a day and spend their whole shift in the RouteLogic mobile app, are working around it because years of specialized features, used by only a small fraction of customers, have buried the actions they repeat all day. **"Start Route" (about 30 uses a day) sits 2–3 levels deep, and "Mark Delivered" takes 3 taps across 3 screens**, often in bad weather with a package in hand. About 35% of proof-of-delivery uploads fail on weak signal, so drivers retake photos up to 3 times. Instead of fighting the app, drivers **text or WhatsApp dispatch to confirm deliveries, and 5 of 7 focus-group drivers carry a paper manifest** in case the app crashes on long routes. Our largest enterprise account calls RouteLogic **an administrative burden that slows their most time-sensitive work** and is trialing a leaner competitor.
+
+_Revised after Module 2 discovery: the original working assumption focused on dispatchers and fleet coordinators; discovery showed the sharpest, most frequent pain is with frontline drivers._
 
 ## 4. Problem hook
 
