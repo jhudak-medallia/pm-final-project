@@ -32,12 +32,14 @@ _One urgent sentence fusing the business risk and the user pain, your pitch for 
 
 _Who it's for, the new value, and why it's urgent to launch now._
 
-> For the **dispatchers and fleet coordinators who make up 95% of our users**, we will introduce a **workflow manager that makes their most frequent daily tasks fast and simple**, so we can **win back their trust and engagement before they switch to leaner competitors or general-purpose tools**.
+> For **frontline delivery drivers who spend their whole shift in the RouteLogic app**, we will put the actions they repeat all day, **Start Route and Mark Delivered, one tap away** and make sure deliveries confirm reliably on weak signal. Drivers can then **stop relying on texts, calls and paper manifests**, and their fleets get a tool their drivers actually use **instead of switching to leaner competitors**.
 
-As part of RouteLogic Velocity, we will audit the current experience against existing user research to separate essential features from legacy noise. The workflow manager will then focus first on the core real-time coordination tasks, for example **reassigning a driver, updating a customer ETA, and resolving a route exception** _(confirm the top tasks against the brief and Module 2 discovery)_. It makes them simpler by:
+_Revised after Module 2 discovery and Module 3 analysis: the focus moved from dispatchers and fleet coordinators to frontline drivers, where the qualitative and quantitative evidence is strongest._
 
-- Turning each task into a single guided flow with fewer clicks and screens.
-- Using sensible defaults instead of custom setup and configuration.
+As part of RouteLogic Velocity, we will audit the current experience against existing user research to separate essential features from legacy noise. We will focus first on the driver actions repeated at every stop: **starting a route (about 30 times a day), marking a delivery, and capturing proof of delivery**. We will make them simpler by:
+
+- Putting Start Route on the home screen and cutting Mark Delivered from 3 taps across 3 screens to one tap from the stop screen.
+- Making proof-of-delivery uploads reliable on weak signal, with clear confirmation to the driver.
 - Moving the specialized enterprise capabilities (such as global shipping compliance and executive financial reporting) out of the everyday user's way, while keeping them fully available for the customers and roles that need them.
 
 **Why now:** our largest enterprise account is trialing a competitor today and the board is already concerned. Every month we wait, more core users settle into competitors or Slack-and-spreadsheet workarounds, and those habits, and that lost trust, are hard to win back. Velocity is how we prove RouteLogic can still be the fastest tool on the market.
@@ -52,9 +54,11 @@ _Read your hook back as a skeptical stakeholder. If you don't feel the urgency, 
 | Is the moment of misery systemic, or just an edge case? | It appears to be systemic but I'd like to understand how we got here and the specifics of the use cases and workflows that have become too complex to be viable for the core user persona. |
 | Does the value proposition actually remove the obstacle? | The value proposition highlights the problems and desired state, but does not make clear what we are going to build and which use cases it will solve for. |
 
-## 7. Finalized hypothesis _(complete in Module 3)_
+## 7. Finalized hypothesis _(completed in Module 3)_
 
-> Based on [qual + quant evidence], I believe that [solving X] for [persona] will result in [outcome], as measured by a [X%] change in [success metric]. I will protect [guardrail metric] and make a go/no-go decision after [decision window].
+> **We believe** that cutting "Mark Delivered" to one tap from the stop screen and putting "Start Route" on the home screen **for frontline delivery drivers running 40+ stops a day** will raise the share of deliveries confirmed in-app from [baseline]% to [target]% within 8 weeks, **because** drivers currently fall back on texting dispatch and paper manifests rather than navigate 3 screens at each doorstep. **We'll know we're right when** in-app confirmations and time to deliver both improve without route optimizer or dispatch adoption dropping, which should lead to better NPS and fewer at-risk renewals.
+
+See `03-analytics/hypothesis-and-metrics.md` for the full metrics and decision window.
 
 ## Link to full artifact
 
